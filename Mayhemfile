@@ -1,0 +1,6 @@
+image: tngo04/roxmltree:latest
+project: tngo04/roxmltree
+target: roxmltree-afl
+
+cmds:
+  - cmd: /afl-fuzz
