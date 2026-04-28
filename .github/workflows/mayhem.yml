@@ -19,7 +19,7 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Docker BuildX
         uses: docker/setup-buildx-action@v1
@@ -44,14 +44,10 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Mayhem for Code Scan
-        uses: ForAllSecure/mcode-action@v1
+        uses: ForAllSecure/mcode-action@long-runs
         with:
           mayhem-url: https://mayhem.forallsecure.com
           mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
           args: --image ${{ steps.meta.outputs.tags }} --duration 300
-          sarif-output: sarif
 
-      - name: Upload SARIF file(s)
-        uses: github/codeql-action/upload-sarif@v1
-        with:
           sarif_file: sarif
